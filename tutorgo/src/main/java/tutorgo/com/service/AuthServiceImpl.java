@@ -45,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserService userService;
     private final UserMapper userMapper;
 
-    @Value("${google.client.id:#{null}}")
+    @Value("${google.client.id:}")
     private String googleClientId;
 
     @Override
@@ -77,6 +77,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional
     public JwtAuthenticationResponse loginWithGoogle(GoogleLoginRequest googleLoginRequest) {
+        if (googleClientId == null || googleClientId.trim().isEmpty()) {
+            throw new BadRequestException("Google OAuth no está configurado en este servidor.");
+        }
+        
         try {
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
                     .setAudience(Collections.singletonList(googleClientId))
