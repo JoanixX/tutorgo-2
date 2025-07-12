@@ -45,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserService userService;
     private final UserMapper userMapper;
 
-    @Value("${google.client.id}")
+    @Value("${google.client.id:#{null}}")
     private String googleClientId;
 
     @Override
