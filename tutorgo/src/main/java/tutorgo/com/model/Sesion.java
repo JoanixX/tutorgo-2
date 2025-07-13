@@ -43,6 +43,7 @@ public class Sesion {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_estado", nullable = false, columnDefinition = "estado_sesion_enum")
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private EstadoSesionEnum tipoEstado;
 
     @OneToMany(mappedBy = "sesion", cascade = CascadeType.ALL, orphanRemoval = true)

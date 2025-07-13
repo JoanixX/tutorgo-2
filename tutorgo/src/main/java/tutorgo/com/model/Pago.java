@@ -36,9 +36,11 @@ public class Pago {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "metodo_pago", nullable = false, columnDefinition = "metodo_pago_enum")
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private MetodoPagoEnum metodoPago;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_estado", nullable = false, columnDefinition = "estado_pago_enum")
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private EstadoPagoEnum tipoEstado;
 }

@@ -19,5 +19,6 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 150, nullable = false, unique = true)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private RoleName nombre;
 }
