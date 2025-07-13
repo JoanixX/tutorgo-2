@@ -24,7 +24,7 @@ export default function DashboardPage() {
         .then(setStats)
         .catch((error) => {
           console.error('Error al cargar dashboard stats:', error);
-          // No mostrar error al usuario, usar datos por defecto
+          // No mostrar error al usuario, usar datos por defecto,holaaaaa
         })
         .finally(() => setLoadingStats(false));
     }
