@@ -49,13 +49,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/error").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/tutores/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/centros-estudio").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/temas/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/tutores/{id}").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/notificaciones/mis-notificaciones").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/tutores").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/centros-estudio").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/temas/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/notificaciones/mis-notificaciones").authenticated()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
@@ -71,7 +70,11 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowedOrigins(Arrays.asList(
+            "http://localhost:3000",
+            "https://tutorgo-2.vercel.app",
+            "https://tutorgo-frontend.vercel.app"
+        ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers"));
         configuration.setExposedHeaders(Arrays.asList("Authorization"));
